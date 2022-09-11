@@ -1,12 +1,15 @@
 from .util import REQUEST_TYPES, Errors
 
+import threading
 import socket
 import json
 
-class User:
+class User(threading.Thread):
     users = {}
 
     def __init__(self, connection : socket.socket, address : tuple):
+        threading.Thread.__init__(self)
+
         self.ip, self.id = address
         self.connection = connection
 
@@ -14,7 +17,9 @@ class User:
 
         self.users[self.id] = self
 
-    def mainloop(self):
+        self.start()
+
+    def run(self):
         while True:
             try: data = self.connection.recv(1024)
             except (ConnectionResetError, ConnectionAbortedError):
@@ -43,19 +48,20 @@ class User:
                 self.error(Errors.INVALID_REQUEST_TYPE, f"Invalid Request Type: {data['request_type']}")
                 continue
             
-            def check_arguments() -> bool:
-                for requiredArgument, requiredType in requiredArguments.items():
-                    checkArgument = requiredArgument.removeprefix("_")
+            foundBadArgument = False
+            for requiredArgument, requiredType in requiredArguments.items():
+                foundBadArgument = True
+                checkArgument = requiredArgument.removeprefix("_")
 
-                    if not requiredArgument.startswith("_") and not checkArgument in data:
-                        self.error(Errors.MISSING_ARGUMENT, f"Missing Required Argument: {requiredArgument}")
-                        return False
-                    elif not isinstance(data[checkArgument], requiredType):
-                        self.error(Errors.INVALID_TYPE, f"Argument {checkArgument} must be type {requiredType.__name__}")
-                        return False
-                return True
+                if not requiredArgument.startswith("_") and not checkArgument in data:
+                    self.error(Errors.MISSING_ARGUMENT, f"Missing Required Argument: {requiredArgument}")
+                    break
+                elif checkArgument in data and not isinstance(data[checkArgument], requiredType):
+                    self.error(Errors.INVALID_TYPE, f"Argument {checkArgument} must be type {requiredType.__name__}")
+                    break
+                foundBadArgument = False
 
-            if not check_arguments(): continue
+            if foundBadArgument: continue
 
     def disconnect(self):
         print(f"{self.ip}:{self.id} disconnected")

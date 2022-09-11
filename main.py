@@ -1,6 +1,5 @@
 from common.user import User
 
-import threading
 import socket
 
 PORT = 1414
@@ -9,9 +8,7 @@ def main():
     print(f"Server running on {socket.gethostbyname(socket.gethostname())}:{PORT}")
     while True:
         connection, address = s.accept()
-
-        user = User(connection, address)
-        threading.Thread(target=user.mainloop).start()
+        User(connection, address)
 
 if __name__ == "__main__":
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
