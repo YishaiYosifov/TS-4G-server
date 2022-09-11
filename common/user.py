@@ -7,9 +7,10 @@ class User:
     users = {}
 
     def __init__(self, connection : socket.socket, address : tuple):
-        print(f"{self.ip}:{self.id} connected")
         self.ip, self.id = address
         self.connection = connection
+
+        print(f"{self.ip}:{self.id} connected")
 
         self.users[self.id] = self
 
@@ -27,10 +28,13 @@ class User:
             data = data.decode("utf-8")
             try: data = json.loads(data)
             except json.JSONDecodeError:
-                self.error(Errors.WRONG_DATA_TYPE, "Data must be json")
+                self.error(Errors.WRONG_DATA_TYPE, "Data must be dict")
                 continue
 
-            if not "request_type" in data:
+            if not isinstance(data, dict):
+                self.error(Errors.WRONG_DATA_TYPE, "Data must be dict")
+                continue
+            elif not "request_type" in data:
                 self.error(Errors.MISSING_ARGUMENT, "Missing Required Argument: request_type")
                 continue
 
@@ -41,11 +45,13 @@ class User:
             
             def check_arguments() -> bool:
                 for requiredArgument, requiredType in requiredArguments.items():
-                    if not requiredArgument in data and data["requiredArgument"]:
+                    checkArgument = requiredArgument.removeprefix("_")
+
+                    if not requiredArgument.startswith("_") and not checkArgument in data:
                         self.error(Errors.MISSING_ARGUMENT, f"Missing Required Argument: {requiredArgument}")
                         return False
-                    elif not isinstance(data[requiredArgument], requiredType):
-                        self.error(Errors.INVALID_TYPE, f"Argument {requiredArgument} must be type {requiredType.__name__}")
+                    elif not isinstance(data[checkArgument], requiredType):
+                        self.error(Errors.INVALID_TYPE, f"Argument {checkArgument} must be type {requiredType.__name__}")
                         return False
                 return True
 

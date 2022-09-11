@@ -1,7 +1,5 @@
-from typing import Optional
-
 REQUEST_TYPES = {
-    "login": {"role": int, "password": Optional[str]}
+    "login": {"role": int, "_password": str}
 }
 
 class Errors:
