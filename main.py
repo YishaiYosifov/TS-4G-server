@@ -1,4 +1,4 @@
-from common.user import User
+from common import User
 
 import socket
 
