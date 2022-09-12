@@ -20,6 +20,7 @@ class User(threading.Thread):
 
         self.users[self.id] = self
         self.inputBlocked = False
+        self.screenBlocked = False
         self.role = 0
 
         self.start()
@@ -79,7 +80,7 @@ class User(threading.Thread):
 
             getattr(self, data["request_type"])(*arguments)
     
-    def block_input(self, targetID):
+    def block_input(self, targetID : int):
         user = self.users[targetID]
         if user.inputBlocked:
             self.error(Errors.USER_ALREADY_AFFECTED, f"Input for user {targetID} already blocked")
@@ -88,7 +89,7 @@ class User(threading.Thread):
 
         user.action(Actions.BLOCK_INPUT)
     
-    def unblock_input(self, targetID):
+    def unblock_input(self, targetID : int):
         user = self.users[targetID]
         if not user.inputBlocked:
             self.error(Errors.USER_NOT_AFFECTED, f"Input for user {targetID} is not blocked")
@@ -96,6 +97,24 @@ class User(threading.Thread):
         user.inputBlocked = False
 
         user.action(Actions.UNBLOCK_INPUT)
+    
+    def block_screen(self, targetID : int):
+        user = self.users[targetID]
+        if user.screenBlocked:
+            self.error(Errors.USER_ALREADY_AFFECTED, f"Screen for user {targetID} already blocked")
+            return
+        user.screenBlocked = True
+
+        user.action(Actions.BLOCK_SCREEN)
+
+    def unblock_screen(self, targetID : int):
+        user = self.users[targetID]
+        if user.screenBlocked:
+            self.error(Errors.USER_ALREADY_AFFECTED, f"Screen for user {targetID} not blocked")
+            return
+        user.screenBlocked = False
+
+        user.action(Actions.UNBLOCK_SCREEN)
     
     def login(self, role : int, password : str):
         if not role in CONFIG["roles"]:

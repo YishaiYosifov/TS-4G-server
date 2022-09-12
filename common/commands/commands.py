@@ -23,6 +23,12 @@ COMMANDS = {
         arguments=[CommandArgument(name="target_id", type=int, validation=check_id)]),
     "unblock_input": Command(
         role=1,
+        arguments=[CommandArgument(name="target_id", type=int, validation=check_id)]),
+    "block_screen": Command(
+        role=1,
+        arguments=[CommandArgument(name="target_id", type=int, validation=check_id)]),
+    "unblock_screen": Command(
+        role=1,
         arguments=[CommandArgument(name="target_id", type=int, validation=check_id)]
     )
 }

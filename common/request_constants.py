@@ -18,5 +18,7 @@ class Callbacks:
     LOGGED_IN_SUCCESSFULLY = "logged_in"
 
 class Actions:
-    BLOCK_INPUT = "block_input"
+    UNBLOCK_SCREEN = "unblock_screen"
     UNBLOCK_INPUT = "unblock_input"
+    BLOCK_SCREEN = "block_screen"
+    BLOCK_INPUT = "block_input"
