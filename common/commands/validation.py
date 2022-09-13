@@ -1,4 +1,4 @@
-from common import *
+from common import Errors
 
 def check_id(user, userID : int) -> bool:
     if not userID in user.users:

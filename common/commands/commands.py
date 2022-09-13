@@ -1,6 +1,6 @@
+from .validation import check_id
 from typing import Any, Callable
 from pydantic import BaseModel
-from .validation import *
 
 class CommandArgument(BaseModel):
     name : str

@@ -13,6 +13,8 @@ class Errors:
     INVALID_ROLE = "invalid_role"
 
 class Callbacks:
+    BLOCKED_SCREEN_SUCCESSFULLY = "blocked_screen"
+    UNBLOCKED_SCREEN_SUCCESSFULLY = "unblocked_screen"
     UNBLOCKED_INPUT_SUCCESSFULLY = "unblocked_input"
     BLOCKED_INPUT_SUCCESSFULLY = "blocked_input"
     LOGGED_IN_SUCCESSFULLY = "logged_in"

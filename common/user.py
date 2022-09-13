@@ -1,5 +1,5 @@
-from .commands import *
-from . import *
+from .request_constants import *
+from .commands import COMMANDS
 
 import threading
 import socket
@@ -88,6 +88,7 @@ class User(threading.Thread):
         user.inputBlocked = True
 
         user.action(Actions.BLOCK_INPUT)
+        self.callback(Callbacks.BLOCKED_INPUT_SUCCESSFULLY)
     
     def unblock_input(self, targetID : int):
         user = self.users[targetID]
@@ -97,6 +98,7 @@ class User(threading.Thread):
         user.inputBlocked = False
 
         user.action(Actions.UNBLOCK_INPUT)
+        self.callback(Callbacks.UNBLOCKED_INPUT_SUCCESSFULLY)
     
     def block_screen(self, targetID : int):
         user = self.users[targetID]
@@ -106,15 +108,17 @@ class User(threading.Thread):
         user.screenBlocked = True
 
         user.action(Actions.BLOCK_SCREEN)
+        self.callback(Callbacks.BLOCKED_SCREEN_SUCCESSFULLY)
 
     def unblock_screen(self, targetID : int):
         user = self.users[targetID]
-        if user.screenBlocked:
+        if not user.screenBlocked:
             self.error(Errors.USER_ALREADY_AFFECTED, f"Screen for user {targetID} not blocked")
             return
         user.screenBlocked = False
 
         user.action(Actions.UNBLOCK_SCREEN)
+        self.callback(Callbacks.UNBLOCKED_SCREEN_SUCCESSFULLY)
     
     def login(self, role : int, password : str):
         if not role in CONFIG["roles"]:
