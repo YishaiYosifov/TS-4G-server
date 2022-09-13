@@ -23,6 +23,9 @@ class Callbacks:
     BLOCKED_INPUT_SUCCESSFULLY = "blocked_input"
     
     LOGGED_IN_SUCCESSFULLY = "logged_in"
+    USER_DISCONNECTED = "user_disconnected"
+    USER_LOGGED_IN = "user_logged_in"
+
     USERS = "users"
 
 class Actions:

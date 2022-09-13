@@ -14,7 +14,7 @@ class User(threading.Thread):
 
         self.ip, self.id = address
         self.connection = connection
-
+        
         print(f"{self.ip}:{self.id} connected")
 
         self.users[self.id] = self
@@ -85,6 +85,8 @@ class User(threading.Thread):
     
     def disconnect(self):
         print(f"{self.ip}:{self.id} disconnected")
+        User.callback_to_all(Callbacks.USER_DISCONNECTED, data={"user": self.to_dict()}, exclude=[self.id])
+
         self.connection.close()
         self.users.pop(self.id)
 
@@ -95,3 +97,12 @@ class User(threading.Thread):
     def callback(self, type : str, data : dict = {}): self.__send({"request_type": "callback", "type": type} | data)
 
     def __send(self, data : dict): self.connection.send(json.dumps(data).encode("utf-8"))
+    
+    @staticmethod
+    def __send_to_all(data : dict, exclude : list = []):
+        for user in User.users.values():
+            if user.id in exclude: continue
+            user.__send(data)
+    
+    @staticmethod
+    def callback_to_all(type : str, data : dict, exclude : list = []): User.__send_to_all({"request_type": "callback", "type": type} | data, exclude)

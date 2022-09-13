@@ -1,7 +1,7 @@
 from common.request_constants import *
 from common import CONFIG
 
-def run(user, role : int, pcName, password : str):
+def run(user, role : int, pcName : str, password : str):
     if not role in CONFIG["roles"]:
         user.error(Errors.INVALID_ROLE, f"Unknwon Role: {role}")
         return
@@ -14,3 +14,5 @@ def run(user, role : int, pcName, password : str):
     user.pcName = pcName
     user.role = int(role)
     user.callback(Callbacks.LOGGED_IN_SUCCESSFULLY)
+
+    user.callback_to_all(Callbacks.USER_LOGGED_IN, {"user": user.to_dict()}, exclude=[user.id])
