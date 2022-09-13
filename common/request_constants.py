@@ -23,6 +23,7 @@ class Callbacks:
     BLOCKED_INPUT_SUCCESSFULLY = "blocked_input"
     
     LOGGED_IN_SUCCESSFULLY = "logged_in"
+    USERS = "users"
 
 class Actions:
     UNBLOCK_INPUT = "unblock_input"

@@ -1,3 +1,5 @@
+from .get_all_users import run as get_all_users
+
 from .unblock_screen import run as unblock_screen
 from .block_screen import run as block_screen
 

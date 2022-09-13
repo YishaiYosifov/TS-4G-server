@@ -18,8 +18,11 @@ class User(threading.Thread):
         print(f"{self.ip}:{self.id} connected")
 
         self.users[self.id] = self
+
         self.inputBlocked = False
         self.screenBlocked = False
+
+        self.pcName = ""
         self.role = 0
 
         self.start()
@@ -84,7 +87,9 @@ class User(threading.Thread):
         print(f"{self.ip}:{self.id} disconnected")
         self.connection.close()
         self.users.pop(self.id)
-    
+
+    def to_dict(self) -> dict: return {"id": self.id, "pc_name": self.pcName, "blocked": {"screen": self.screenBlocked, "input": self.inputBlocked}}
+
     def error(self, type : str, msg : str): self.__send({"request_type": "error", "type": type, "msg": msg})
     def action(self, type : str): self.__send({"request_type": "action", "type": type})
     def callback(self, type : str, data : dict = {}): self.__send({"request_type": "callback", "type": type} | data)
