@@ -1,2 +1,4 @@
 from .request_constants import *
-from .user import User
+
+import json
+with open("config.json") as f: CONFIG = json.load(f)

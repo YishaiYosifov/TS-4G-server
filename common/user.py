@@ -1,11 +1,10 @@
+from .commands.functions import commandFunctions
 from .request_constants import *
 from .commands import COMMANDS
 
 import threading
 import socket
 import json
-
-with open("config.json") as f: CONFIG = json.load(f)
 
 class User(threading.Thread):
     users = {}
@@ -78,60 +77,8 @@ class User(threading.Thread):
 
             if foundBadArgument: continue
 
-            getattr(self, data["request_type"])(*arguments)
-    
-    def block_input(self, targetID : int):
-        user = self.users[targetID]
-        if user.inputBlocked:
-            self.error(Errors.USER_ALREADY_AFFECTED, f"Input for user {targetID} already blocked")
-            return
-        user.inputBlocked = True
-
-        user.action(Actions.BLOCK_INPUT)
-        self.callback(Callbacks.BLOCKED_INPUT_SUCCESSFULLY)
-    
-    def unblock_input(self, targetID : int):
-        user = self.users[targetID]
-        if not user.inputBlocked:
-            self.error(Errors.USER_NOT_AFFECTED, f"Input for user {targetID} is not blocked")
-            return
-        user.inputBlocked = False
-
-        user.action(Actions.UNBLOCK_INPUT)
-        self.callback(Callbacks.UNBLOCKED_INPUT_SUCCESSFULLY)
-    
-    def block_screen(self, targetID : int):
-        user = self.users[targetID]
-        if user.screenBlocked:
-            self.error(Errors.USER_ALREADY_AFFECTED, f"Screen for user {targetID} already blocked")
-            return
-        user.screenBlocked = True
-
-        user.action(Actions.BLOCK_SCREEN)
-        self.callback(Callbacks.BLOCKED_SCREEN_SUCCESSFULLY)
-
-    def unblock_screen(self, targetID : int):
-        user = self.users[targetID]
-        if not user.screenBlocked:
-            self.error(Errors.USER_ALREADY_AFFECTED, f"Screen for user {targetID} not blocked")
-            return
-        user.screenBlocked = False
-
-        user.action(Actions.UNBLOCK_SCREEN)
-        self.callback(Callbacks.UNBLOCKED_SCREEN_SUCCESSFULLY)
-    
-    def login(self, role : int, password : str):
-        if not role in CONFIG["roles"]:
-            self.error(Errors.INVALID_ROLE, f"Unknwon Role: {role}")
-            return
-
-        rolePassword = CONFIG["roles"][role]
-        if rolePassword and password != rolePassword:
-            self.error(Errors.INVALID_PASSWORD, "Invalid Password")
-            return
-        
-        self.role = int(role)
-        self.callback(Callbacks.LOGGED_IN_SUCCESSFULLY)
+            arguments.insert(0, self)
+            commandFunctions[data["request_type"]](*arguments)
     
     def disconnect(self):
         print(f"{self.ip}:{self.id} disconnected")
