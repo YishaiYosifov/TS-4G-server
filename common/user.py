@@ -97,7 +97,7 @@ class User(threading.Thread):
     def action(self, type : str): self.__send({"request_type": "action", "type": type})
     def callback(self, type : str, data : dict = {}): self.__send({"request_type": "callback", "type": type} | data)
 
-    def __send(self, data : dict): self.connection.send(json.dumps(data).encode("utf-8"))
+    def __send(self, data : dict): self.connection.send((json.dumps(data) + "\r").encode("utf-8"))
     
     @staticmethod
     def __send_to_all(data : dict, exclude : list = []):
