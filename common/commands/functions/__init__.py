@@ -8,4 +8,3 @@ from .login import *
 
 commandFunctions = {}
 for command in COMMANDS.keys(): commandFunctions[command] = locals()[command]
-print(commandFunctions)
