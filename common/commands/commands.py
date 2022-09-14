@@ -16,7 +16,7 @@ COMMANDS = {
     "login": Command(
         arguments=[
             CommandArgument(name="role", type=int),
-            CommandArgument(name="pc_name", type=str),
+            CommandArgument(name="pc_name", type=str, required=False),
             CommandArgument(name="password", type=str, required=False)
         ]),
     "block_input": Command(
