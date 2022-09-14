@@ -26,6 +26,7 @@ class Callbacks:
     USER_DISCONNECTED = "user_disconnected"
     USER_LOGGED_IN = "user_logged_in"
 
+    COMMANDS = "commands"
     USERS = "users"
 
 class Actions:

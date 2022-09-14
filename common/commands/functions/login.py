@@ -1,7 +1,7 @@
 from common.request_constants import *
 from common import CONFIG
 
-def run(user, role : int, pcName : str, password : str):
+def login(user, role : int, pcName : str, password : str):
     if not role in CONFIG["roles"]:
         user.error(Errors.INVALID_ROLE, f"Unknwon Role: {role}")
         return

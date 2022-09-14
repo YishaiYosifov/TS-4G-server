@@ -61,6 +61,7 @@ class User(threading.Thread):
                 continue
             
             arguments = []
+            foundBadArgument = False
             for argument in command.arguments:
                 foundBadArgument = True
 

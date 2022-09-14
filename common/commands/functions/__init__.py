@@ -1,18 +1,11 @@
-from .get_all_users import run as get_all_users
+from common.commands import COMMANDS
 
-from .unblock_screen import run as unblock_screen
-from .block_screen import run as block_screen
-
-from .unblock_input import run as unblock_input
-from .block_input import run as block_input
-
-from .login import run as login
-
-import os
+from .get_all_users import *
+from .get_actions import *
+from .screen import *
+from .input import *
+from .login import *
 
 commandFunctions = {}
-for file in os.listdir("common/commands/functions"):
-    if not file.endswith(".py") or file == "__init__.py" or os.path.isdir(f"common/actions/{file}"): continue
-
-    file = file.removesuffix(".py")
-    commandFunctions[file] = locals()[file]
+for command in COMMANDS.keys(): commandFunctions[command] = locals()[command]
+print(commandFunctions)

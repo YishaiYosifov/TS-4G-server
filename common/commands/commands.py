@@ -31,5 +31,6 @@ COMMANDS = {
     "unblock_screen": Command(
         role=1,
         arguments=[CommandArgument(name="target_id", type=int, validation=check_id)]),
-    "get_all_users": Command(role=1)
+    "get_all_users": Command(role=1),
+    "get_commands": Command(role=0)
 }
