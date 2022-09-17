@@ -33,3 +33,7 @@ def init_target_screenshare(user, targetID : int, screenshareID : int):
     user.callback(Callbacks.SCREENSHARE_STARTED)
     user.users.pop(user.id)
     user.closed = True
+
+def click(user, targetID : int, x : int, y : int):
+    targetUser = user.users[targetID]
+    targetUser.action(Actions.CLICK, {"x": x, "y": y})

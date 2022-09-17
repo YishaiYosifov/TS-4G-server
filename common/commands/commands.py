@@ -40,6 +40,13 @@ COMMANDS = {
         arguments=[
             CommandArgument(name="target_id", type=int, validation=check_id),
             CommandArgument(name="screenshare_id", type=int)]),
+    
+    "click": Command(
+        role=1,
+        arguments=[
+            CommandArgument(name="target_id", type=int, validation=check_id_no_host),
+            CommandArgument(name="x", type=int),
+            CommandArgument(name="y", type=int)]),
 
     "get_connected_users": Command(role=1),
     "get_actions": Command()

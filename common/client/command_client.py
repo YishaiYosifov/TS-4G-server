@@ -42,56 +42,62 @@ class CommandClient(threading.Thread):
                 self.disconnect()
                 return
 
-            try:
-                data = data.decode("utf-8")
-                data = json.loads(data)
-            except (json.JSONDecodeError, UnicodeDecodeError):
-                self.error(Errors.WRONG_DATA_TYPE, "Data must be a dict")
-                continue
+            for request in data.split(b"}{"):
+                if not request: continue
 
-            if not isinstance(data, dict):
-                self.error(Errors.WRONG_DATA_TYPE, "Data must be a dict")
-                continue
-            elif not "request_type" in data:
-                self.error(Errors.MISSING_ARGUMENT, "Missing Required Argument: request_type")
-                continue
+                if not request.endswith(b"}"): request += b"}"
+                elif not request.startswith(b"{"): request = b"{" + request
 
-            try: command = COMMANDS[data["request_type"]]
-            except KeyError:
-                self.error(Errors.INVALID_REQUEST_TYPE, f"Invalid Request Type: {data['request_type']}")
-                continue
-            
-            if not command.role is None:
-                if not self.role:
-                    self.error(Errors.INSUFFICIENT_ROLE, "Not Logged in")
+                try:
+                    request = request.decode("utf-8")
+                    request = json.loads(request)
+                except (json.JSONDecodeError, UnicodeDecodeError):
+                    self.error(Errors.WRONG_DATA_TYPE, "Data must be a dict")
                     continue
-                elif command.role != self.role:
-                    self.error(Errors.INSUFFICIENT_ROLE, f"Insufficient Permissions Level: {self.role}")
+
+                if not isinstance(request, dict):
+                    self.error(Errors.WRONG_DATA_TYPE, "Data must be a dict")
                     continue
-            
-            arguments = []
-            foundBadArgument = False
-            for argument in command.arguments:
-                foundBadArgument = True
+                elif not "request_type" in request:
+                    self.error(Errors.MISSING_ARGUMENT, "Missing Required Argument: request_type")
+                    continue
 
-                value = None
-                if argument.name in data:
-                    value = data[argument.name]
-                    if not isinstance(value, argument.type):
-                        self.error(Errors.INVALID_TYPE, f"Argument {argument.name} must be type {argument.type.__name__}")
-                        break
-
-                    if not argument.validation(self, value): break
-                elif argument.required:
-                    self.error(Errors.MISSING_ARGUMENT, f"Missing Required Argument: {argument.name}")
-                    break
-                arguments.append(value)
+                try: command = COMMANDS[request["request_type"]]
+                except KeyError:
+                    self.error(Errors.INVALID_REQUEST_TYPE, f"Invalid Request Type: {request['request_type']}")
+                    continue
+                
+                if not command.role is None:
+                    if not self.role:
+                        self.error(Errors.INSUFFICIENT_ROLE, "Not Logged in")
+                        continue
+                    elif command.role != self.role:
+                        self.error(Errors.INSUFFICIENT_ROLE, f"Insufficient Permissions Level: {self.role}")
+                        continue
+                
+                arguments = []
                 foundBadArgument = False
+                for argument in command.arguments:
+                    foundBadArgument = True
 
-            if foundBadArgument: continue
+                    value = None
+                    if argument.name in request:
+                        value = request[argument.name]
+                        if not isinstance(value, argument.type):
+                            self.error(Errors.INVALID_TYPE, f"Argument {argument.name} must be type {argument.type.__name__}")
+                            break
 
-            arguments.insert(0, self)
-            commandFunctions[data["request_type"]](*arguments)
+                        if not argument.validation(self, value): break
+                    elif argument.required:
+                        self.error(Errors.MISSING_ARGUMENT, f"Missing Required Argument: {argument.name}")
+                        break
+                    arguments.append(value)
+                    foundBadArgument = False
+
+                if foundBadArgument: continue
+
+                arguments.insert(0, self)
+                commandFunctions[request["request_type"]](*arguments)
     
     def disconnect(self):
         print(f"{self.ip}:{self.id} disconnected")

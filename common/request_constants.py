@@ -44,3 +44,5 @@ class Actions:
     BLOCK_SCREEN = "block_screen"
 
     START_SCREENSHARE = "start_screenshare"
+
+    CLICK = "click"
