@@ -1,7 +1,12 @@
+from __future__ import annotations
+
 from common.request_constants import *
+from typing import TYPE_CHECKING
 from common.util import CONFIG
 
-def login(user, role : int, pcName : str, password : str):
+if TYPE_CHECKING: from common.client.command_client import CommandClient
+
+def login(user : CommandClient, role : int, pcName : str, password : str):
     configRole = str(role)
     if not configRole in CONFIG["roles"]:
         user.error(Errors.INVALID_ROLE, f"Unknwon Role: {role}")

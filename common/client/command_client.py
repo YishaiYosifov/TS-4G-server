@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from common.commands.functions import commandFunctions
 from common.request_constants import *
 from common.commands import COMMANDS
@@ -8,7 +10,7 @@ import socket
 import json
 
 class CommandClient(threading.Thread):
-    users = {}
+    users : dict[int, CommandClient] = {}
 
     def __init__(self, connection : socket.socket, address : tuple):
         threading.Thread.__init__(self)
@@ -23,8 +25,9 @@ class CommandClient(threading.Thread):
         self.inputBlocked = False
         self.screenBlocked = False
 
-        self.pcName = ""
-        self.role = None
+        self.screenshare  : int = None
+        self.role : int = None
+        self.pcName : str = None
 
         self.closed = False
         self.start()
@@ -116,7 +119,9 @@ class CommandClient(threading.Thread):
     def action(self, type : str, data : dict = {}): self.__send({"request_type": "action", "type": type} | data)
     def callback(self, type : str, data : dict = {}): self.__send({"request_type": "callback", "type": type} | data)
 
-    def __send(self, data : dict): self.connection.sendall((json.dumps(data) + "\r").encode("utf-8"))
+    def __send(self, data : dict):
+        try: self.connection.sendall((json.dumps(data) + "\r").encode("utf-8"))
+        except ConnectionResetError: pass
 
     @staticmethod
     def __send_to_all(data : dict, exclude : list = []):

@@ -1,6 +1,11 @@
-from common.request_constants import *
+from __future__ import annotations
 
-def block_screen(user, targetID : int):
+from common.request_constants import *
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING: from common.client.command_client import CommandClient
+
+def block_screen(user : CommandClient, targetID : int):
     targetUser = user.users[targetID]
     if targetUser.screenBlocked:
         user.error(Errors.USER_ALREADY_AFFECTED, f"Screen for user {targetID} already blocked")

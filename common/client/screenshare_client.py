@@ -1,10 +1,13 @@
+from __future__ import annotations
+
+import common.client.command_client as command_client
 import threading
 import socket
 import struct
 import time
 
 class ScreenshareClient(threading.Thread):
-    users = {}
+    users : dict[int, ScreenshareClient] = {}
 
     def __init__(self, connection: socket.socket, address: tuple, targetID : int, screenshareID : int):
         threading.Thread.__init__(self)
@@ -15,32 +18,24 @@ class ScreenshareClient(threading.Thread):
         self.users[targetID] = self
         self.screenshareID = screenshareID
 
-        self.target = None
+        self.targetUser : command_client.CommandClient = None
         self.started = False
 
         self.start()
     
     def run(self):
-        self.connection.setblocking(0)
         while not self.started:
-            try:
-                data = self.connection.recv(16, socket.MSG_PEEK)
-                if not data:
-                    self.quit()
-                    return
-            except (ConnectionResetError, BlockingIOError) as e:
-                if not isinstance(e, BlockingIOError):
-                    self.quit()
-                    return
+            if self.connection.fileno() == -1:
+                self.quit()
+                return
 
             time.sleep(1)
-        self.connection.setblocking(1)
         
         data = b""
         payloadSize = struct.calcsize("Q")
         while True:
             while len(data) < payloadSize:
-                try: packet = self.target.recv(4096)
+                try: packet = self.targetUser.connection.recv(4096)
                 except (ConnectionResetError, ConnectionAbortedError):
                     self.quit()
                     return
@@ -60,8 +55,8 @@ class ScreenshareClient(threading.Thread):
                 return
             
             try:
-                while len(data) < messageSize: data += self.target.recv(4*1024)
-            except ConnectionError:
+                while len(data) < messageSize: data += self.targetUser.connection.recv(4096)
+            except (ConnectionError, OSError):
                 self.quit()
                 return
 
@@ -75,6 +70,10 @@ class ScreenshareClient(threading.Thread):
             data = data[messageSize:]
     
     def quit(self):
-        try: self.target.close()
-        except AttributeError: pass
-        self.connection.close()
+        if self.targetUser.connection.fileno() != -1:
+            self.targetUser.connection.close()
+            print(f"{self.targetUser.ip}:{self.targetUser.id} disconnected")
+
+        if self.connection.fileno() != -1:
+            self.connection.close()
+            print(f"{self.ip}:{self.id} disconnected")
