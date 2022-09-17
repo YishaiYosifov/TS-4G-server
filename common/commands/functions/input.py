@@ -19,4 +19,3 @@ def block_input(user, targetID):
 
     targetUser.action(Actions.BLOCK_INPUT)
     user.callback(Callbacks.BLOCKED_INPUT_SUCCESSFULLY)
-

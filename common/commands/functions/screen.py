@@ -1,6 +1,6 @@
 from common.request_constants import *
 
-def block_screen(user, targetID):
+def block_screen(user, targetID : int):
     targetUser = user.users[targetID]
     if targetUser.screenBlocked:
         user.error(Errors.USER_ALREADY_AFFECTED, f"Screen for user {targetID} already blocked")
@@ -10,7 +10,7 @@ def block_screen(user, targetID):
     targetUser.action(Actions.BLOCK_SCREEN)
     user.callback(Callbacks.BLOCKED_SCREEN_SUCCESSFULLY)
 
-def unblock_screen(user, targetID):
+def unblock_screen(user, targetID : int):
     targetUser = user.users[targetID]
     if not targetUser.screenBlocked:
         user.error(Errors.USER_ALREADY_AFFECTED, f"Screen for user {targetID} not blocked")

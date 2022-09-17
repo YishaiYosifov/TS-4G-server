@@ -1,12 +1,13 @@
-from .commands.functions import commandFunctions
-from .request_constants import *
-from .commands import COMMANDS
+from common.commands.functions import commandFunctions
+from common.request_constants import *
+from common.commands import COMMANDS
 
+import common.client.screenshare_client as screenshare_client
 import threading
 import socket
 import json
 
-class User(threading.Thread):
+class CommandClient(threading.Thread):
     users = {}
 
     def __init__(self, connection : socket.socket, address : tuple):
@@ -14,7 +15,7 @@ class User(threading.Thread):
 
         self.ip, self.id = address
         self.connection = connection
-        
+
         print(f"{self.ip}:{self.id} connected")
 
         self.users[self.id] = self
@@ -23,12 +24,15 @@ class User(threading.Thread):
         self.screenBlocked = False
 
         self.pcName = ""
-        self.role = 0
+        self.role = None
 
+        self.closed = False
         self.start()
 
     def run(self):
         while True:
+            if self.closed: return
+
             try: data = self.connection.recv(1024)
             except (ConnectionResetError, ConnectionAbortedError):
                 self.disconnect()
@@ -38,9 +42,10 @@ class User(threading.Thread):
                 self.disconnect()
                 return
 
-            data = data.decode("utf-8")
-            try: data = json.loads(data)
-            except json.JSONDecodeError:
+            try:
+                data = data.decode("utf-8")
+                data = json.loads(data)
+            except (json.JSONDecodeError, UnicodeDecodeError):
                 self.error(Errors.WRONG_DATA_TYPE, "Data must be a dict")
                 continue
 
@@ -55,10 +60,14 @@ class User(threading.Thread):
             except KeyError:
                 self.error(Errors.INVALID_REQUEST_TYPE, f"Invalid Request Type: {data['request_type']}")
                 continue
-
-            if command.role > self.role:
-                self.error(Errors.INSUFFICIENT_ROLE, f"Insufficient Permissions Level: {self.role}")
-                continue
+            
+            if not command.role is None:
+                if not self.role:
+                    self.error(Errors.INSUFFICIENT_ROLE, "Not Logged in")
+                    continue
+                elif command.role != self.role:
+                    self.error(Errors.INSUFFICIENT_ROLE, f"Insufficient Permissions Level: {self.role}")
+                    continue
             
             arguments = []
             foundBadArgument = False
@@ -86,7 +95,11 @@ class User(threading.Thread):
     
     def disconnect(self):
         print(f"{self.ip}:{self.id} disconnected")
-        User.callback_to_all(Callbacks.USER_DISCONNECTED, data={"user": self.to_dict()}, exclude=[self.id])
+
+        try: screenshare_client.ScreenshareClient.users[self.id].quit()
+        except KeyError: pass
+        
+        CommandClient.callback_to_all(Callbacks.USER_DISCONNECTED, data={"user": self.to_dict()}, exclude=[self.id])
 
         self.connection.close()
         self.users.pop(self.id)
@@ -94,16 +107,17 @@ class User(threading.Thread):
     def to_dict(self) -> dict: return {"id": self.id, "pc_name": self.pcName, "blocked": {"screen": self.screenBlocked, "input": self.inputBlocked}}
 
     def error(self, type : str, msg : str): self.__send({"request_type": "error", "type": type, "msg": msg})
-    def action(self, type : str): self.__send({"request_type": "action", "type": type})
+    def action(self, type : str, data : dict = {}): self.__send({"request_type": "action", "type": type} | data)
     def callback(self, type : str, data : dict = {}): self.__send({"request_type": "callback", "type": type} | data)
 
-    def __send(self, data : dict): self.connection.send((json.dumps(data) + "\r").encode("utf-8"))
-    
+    def __send(self, data : dict): self.connection.sendall((json.dumps(data) + "\r").encode("utf-8"))
+
     @staticmethod
     def __send_to_all(data : dict, exclude : list = []):
-        for user in User.users.values():
+        for user in CommandClient.users.values():
             if user.id in exclude: continue
-            user.__send(data)
+            try: user.__send(data)
+            except OSError: pass
     
     @staticmethod
-    def callback_to_all(type : str, data : dict, exclude : list = []): User.__send_to_all({"request_type": "callback", "type": type} | data, exclude)
+    def callback_to_all(type : str, data : dict, exclude : list = []): CommandClient.__send_to_all({"request_type": "callback", "type": type} | data, exclude)

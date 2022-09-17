@@ -1,5 +1,5 @@
 from common.request_constants import *
-from common import CONFIG
+from common.util import CONFIG
 
 def login(user, role : int, pcName : str, password : str):
     configRole = str(role)
@@ -11,9 +11,9 @@ def login(user, role : int, pcName : str, password : str):
     if rolePassword and password != rolePassword:
         user.error(Errors.INVALID_PASSWORD, "Invalid Password")
         return
-    
+
     user.pcName = pcName
     user.role = role
     user.callback(Callbacks.LOGGED_IN_SUCCESSFULLY)
 
-    user.callback_to_all(Callbacks.USER_LOGGED_IN, {"user": user.to_dict()}, exclude=[user.id])
+    if not role == 2: user.callback_to_all(Callbacks.USER_LOGGED_IN, {"user": user.to_dict()}, exclude=[user.id])

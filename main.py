@@ -1,4 +1,4 @@
-from common.user import User
+from common.client import command_client
 
 import socket
 
@@ -8,7 +8,7 @@ def main():
     print(f"Server running on {socket.gethostbyname(socket.gethostname())}:{PORT}")
     while True:
         connection, address = s.accept()
-        User(connection, address)
+        command_client.CommandClient(connection, address)
 
 if __name__ == "__main__":
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

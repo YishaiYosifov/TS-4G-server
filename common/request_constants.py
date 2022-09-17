@@ -8,12 +8,16 @@ class Errors:
     INSUFFICIENT_ROLE = "insufficient_role"
     MISSING_ARGUMENT = "missing_argument"
     WRONG_DATA_TYPE = "wrong_data_type"
+
+    NOT_TARGET = "not_target"
     
     INVALID_REQUEST_TYPE = "invalid_request_type"
     INVALID_PASSWORD = "invalid_password"
     INVALID_USER_ID = "invalid_user_id"
     INVALID_TYPE = "invalid_type"
     INVALID_ROLE = "invalid_role"
+
+    INVALID_AUTHORIZATION = "invalid_authorization"
 
 class Callbacks:
     UNBLOCKED_SCREEN_SUCCESSFULLY = "unblocked_screen"
@@ -26,6 +30,9 @@ class Callbacks:
     USER_DISCONNECTED = "user_disconnected"
     USER_LOGGED_IN = "user_logged_in"
 
+    AWAITING_SCREENSHARE_CLIENT = "awaiting_screenshare_client"
+    SCREENSHARE_STARTED = "screenshare_started"
+
     AVAILABLE_ACTIONS = "actions"
     USERS = "users"
 
@@ -35,3 +42,5 @@ class Actions:
 
     UNBLOCK_SCREEN = "unblock_screen"
     BLOCK_SCREEN = "block_screen"
+
+    START_SCREENSHARE = "start_screenshare"
