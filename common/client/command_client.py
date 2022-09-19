@@ -25,6 +25,12 @@ class CommandClient(threading.Thread):
         self.inputBlocked = False
         self.screenBlocked = False
 
+        self.blocked = {
+            "input": False,
+            "screen": False,
+            "urls": []
+        }
+
         self.screenshare  : int = None
         self.role : int = None
         self.pcName : str = None
@@ -113,7 +119,7 @@ class CommandClient(threading.Thread):
         self.connection.close()
         self.users.pop(self.id)
 
-    def to_dict(self) -> dict: return {"id": self.id, "pc_name": self.pcName, "blocked": {"screen": self.screenBlocked, "input": self.inputBlocked}}
+    def to_dict(self) -> dict: return {"id": self.id, "pc_name": self.pcName, "blocked": self.blocked}
 
     def error(self, type : str, msg : str): self.__send({"request_type": "error", "type": type, "msg": msg})
     def action(self, type : str, data : dict = {}): self.__send({"request_type": "action", "type": type} | data)

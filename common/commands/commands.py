@@ -32,6 +32,20 @@ COMMANDS = {
     "unblock_screen": Command(
         role=1,
         arguments=[CommandArgument(name="target_id", type=int, validation=check_id_no_host)]),
+    
+    "block_url": Command(
+        role=1,
+        arguments=[
+            CommandArgument(name="target_id", type=int, validation=check_id_no_host),
+            CommandArgument(name="url", type=str)
+        ]),
+    "unblock_url": Command(
+        role=1,
+        arguments=[
+            CommandArgument(name="target_id", type=int, validation=check_id_no_host),
+            CommandArgument(name="url", type=str)
+        ]),
+    "set_blocked_urls": Command(arguments=[CommandArgument(name="urls", type=list)]),
 
     "start_screenshare": Command(
         role=2,
@@ -39,14 +53,16 @@ COMMANDS = {
     "init_target_screenshare": Command(
         arguments=[
             CommandArgument(name="target_id", type=int, validation=check_id),
-            CommandArgument(name="screenshare_id", type=int)]),
+            CommandArgument(name="screenshare_id", type=int)
+        ]),
     
     "click": Command(
         role=1,
         arguments=[
             CommandArgument(name="target_id", type=int, validation=check_id_no_host),
             CommandArgument(name="x", type=int),
-            CommandArgument(name="y", type=int)]),
+            CommandArgument(name="y", type=int)
+        ]),
 
     "get_connected_users": Command(role=1),
     "get_actions": Command()

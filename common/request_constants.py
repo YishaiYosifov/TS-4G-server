@@ -16,6 +16,7 @@ class Errors:
     INVALID_USER_ID = "invalid_user_id"
     INVALID_TYPE = "invalid_type"
     INVALID_ROLE = "invalid_role"
+    INVALID_URL = "invalid_url"
 
     INVALID_AUTHORIZATION = "invalid_authorization"
 
@@ -25,6 +26,10 @@ class Callbacks:
 
     UNBLOCKED_INPUT_SUCCESSFULLY = "unblocked_input"
     BLOCKED_INPUT_SUCCESSFULLY = "blocked_input"
+
+    SET_BLOCKED_URLS_SUCCESSFULLY = "set_blocked_urls"
+    UNBLOCKED_URL_SUCCESSFULLY = "unblocked_url"
+    BLOCKED_URL_SUCCESSFULLY = "blocked_url"
     
     LOGGED_IN_SUCCESSFULLY = "logged_in"
     USER_DISCONNECTED = "user_disconnected"
@@ -42,6 +47,9 @@ class Actions:
 
     UNBLOCK_SCREEN = "unblock_screen"
     BLOCK_SCREEN = "block_screen"
+
+    UNBLOCK_URL = "unblock_url"
+    BLOCK_URL = "block_url"
 
     START_SCREENSHARE = "start_screenshare"
 
