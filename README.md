@@ -10,77 +10,77 @@ Every client command will be sent as a json in a dict:
 3. [Miscellaneous](#miscellaneous)
 -  ### Host
 
-&emsp;&emsp; ◦ <ins id="block_input_command">**[block_input](#block_input_action)**</ins>
-&emsp;&emsp;&emsp;&emsp;▫ Blocks a targets keyboard and mouse.
-&emsp;&emsp;&emsp;&emsp;▫ **Errors**: user_already_affected: You are trying to block a targets input when it's already blocked.
-&emsp;&emsp;&emsp;&emsp;▫ **Arguments**: target_id - int: the ID of the target.
+&emsp;&emsp; ◦ <ins id="block_input_command">**[block_input](#block_input_action)**</ins><br/>
+&emsp;&emsp;&emsp;&emsp;▫ Blocks a targets keyboard and mouse.<br/>
+&emsp;&emsp;&emsp;&emsp;▫ **Errors**: user_already_affected: You are trying to block a targets input when it's already blocked.<br/>
+&emsp;&emsp;&emsp;&emsp;▫ **Arguments**: target_id - int: the ID of the target.<br/>
 &emsp;&emsp;&emsp;&emsp;▫ **Callback**: blocked_input.
 
 <br/>
 
-&emsp;&emsp; ◦ <ins id="unblock_input_command">**[unblock_input](#unblock_input_action)**</ins>
-&emsp;&emsp;&emsp;&emsp;▫  Unblock a targets keyboard and mouse.
-&emsp;&emsp;&emsp;&emsp;▫  **Errors**:  user_not_affected: You are trying to unblock a targets input when it's not blocked.
-&emsp;&emsp;&emsp;&emsp;▫  **Arguments**: target_id - int: the ID of the target.
+&emsp;&emsp; ◦ <ins id="unblock_input_command">**[unblock_input](#unblock_input_action)**</ins><br/>
+&emsp;&emsp;&emsp;&emsp;▫  Unblock a targets keyboard and mouse.<br/>
+&emsp;&emsp;&emsp;&emsp;▫  **Errors**:  user_not_affected: You are trying to unblock a targets input when it's not blocked.<br/>
+&emsp;&emsp;&emsp;&emsp;▫  **Arguments**: target_id - int: the ID of the target.<br/>
 &emsp;&emsp;&emsp;&emsp;▫  **Callback**: unblocked_input.
 
 <br/>
 
-&emsp;&emsp; ◦ <ins id="block_screen_command">**[block_screen](#block_screen_action)**</ins>
-&emsp;&emsp;&emsp;&emsp;▫  Block a targets screen. This will also block their mouse and keyboard.
-&emsp;&emsp;&emsp;&emsp;▫  **Errors**: user_already_affected: You are trying to block a targets screen when it's already blocked.
-&emsp;&emsp;&emsp;&emsp;▫  **Arguments**: target_id - int: the ID of the target.
+&emsp;&emsp; ◦ <ins id="block_screen_command">**[block_screen](#block_screen_action)**</ins><br/>
+&emsp;&emsp;&emsp;&emsp;▫  Block a targets screen. This will also block their mouse and keyboard.<br/>
+&emsp;&emsp;&emsp;&emsp;▫  **Errors**: user_already_affected: You are trying to block a targets screen when it's already blocked.<br/>
+&emsp;&emsp;&emsp;&emsp;▫  **Arguments**: target_id - int: the ID of the target.<br/>
 &emsp;&emsp;&emsp;&emsp;▫  **Callback**: blocked_screen.
 
 <br/>
 
-&emsp;&emsp; ◦ <ins id="unblock_screen_command">**[unblock_screen](#unblock_screen_action)**</ins>
-&emsp;&emsp;&emsp;&emsp;▫   Unblock a targets screen.
-&emsp;&emsp;&emsp;&emsp;▫  **Errors**: user_not_affected: You are trying to unblock a targets screen when it's not blocked.
-&emsp;&emsp;&emsp;&emsp;▫  **Arguments**: target_id - int: the ID of the target.
+&emsp;&emsp; ◦ <ins id="unblock_screen_command">**[unblock_screen](#unblock_screen_action)**</ins><br/>
+&emsp;&emsp;&emsp;&emsp;▫   Unblock a targets screen.<br/>
+&emsp;&emsp;&emsp;&emsp;▫  **Errors**: user_not_affected: You are trying to unblock a targets screen when it's not blocked.<br/>
+&emsp;&emsp;&emsp;&emsp;▫  **Arguments**: target_id - int: the ID of the target.<br/>
 &emsp;&emsp;&emsp;&emsp;▫  **Callback**: unblocked_screen.
 
 <br/>
 
-&emsp;&emsp; ◦ <ins id="block_url_command">**[block_url](#block_url_action)**</ins>
-&emsp;&emsp;&emsp;&emsp;▫  Block a website for a target. 
-&emsp;&emsp;&emsp;&emsp;▫  **Errors**: user_already_affected: You are trying to block a website that is already blocked.
-&emsp;&emsp;&emsp;&emsp;▫  **Arguments**:
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;▫ target_id - int: the ID of the target.
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;▫ url - str: the url of the website you are want to block.
+&emsp;&emsp; ◦ <ins id="block_url_command">**[block_url](#block_url_action)**</ins><br/>
+&emsp;&emsp;&emsp;&emsp;▫  Block a website for a target. <br/>
+&emsp;&emsp;&emsp;&emsp;▫  **Errors**: user_already_affected: You are trying to block a website that is already blocked.<br/>
+&emsp;&emsp;&emsp;&emsp;▫  **Arguments**:<br/>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;▫ target_id - int: the ID of the target.<br/>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;▫ url - str: the url of the website you are want to block.<br/>
 &emsp;&emsp;&emsp;&emsp;▫  **Callback**: blocked_url.
 
 <br/>
 
-&emsp;&emsp; ◦ <ins id="unblock_url_command">**[unblock_url](#unblock_url_action)**</ins>
-&emsp;&emsp;&emsp;&emsp;▫  Unblock a website for a target.
-&emsp;&emsp;&emsp;&emsp;▫  **Errors**: user_not_affected: You are trying to unblock a website that is not blocked.
-&emsp;&emsp;&emsp;&emsp;▫  **Arguments**:
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;▫ target_id - int: the ID of the target.
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;▫ url - str: the url of the website you want to unblock.
-&emsp;&emsp;&emsp;&emsp;▫  **Callback**: unblocked_url.
+&emsp;&emsp; ◦ <ins id="unblock_url_command">**[unblock_url](#unblock_url_action)**</ins><br/>
+&emsp;&emsp;&emsp;&emsp;▫  Unblock a website for a target.<br/>
+&emsp;&emsp;&emsp;&emsp;▫  **Errors**: user_not_affected: You are trying to unblock a website that is not blocked.<br/>
+&emsp;&emsp;&emsp;&emsp;▫  **Arguments**:<br/>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;▫ target_id - int: the ID of the target.<br/>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;▫ url - str: the url of the website you want to unblock.<br/>
+&emsp;&emsp;&emsp;&emsp;▫  **Callback**: unblocked_url.<br/>
 
 <br/>
 
-&emsp;&emsp; ◦ <ins id="start_screenshare_command">**[start_screenshare](#start_screenshare_action)**</ins>
-&emsp;&emsp;&emsp;&emsp;▫  Start a screenshare. To use this command, open a new connection to the server and login with the [screenshare role](#roles).
-&emsp;&emsp;&emsp;&emsp;▫  **Arguments**: target_id - int: the ID of the target.
+&emsp;&emsp; ◦ <ins id="start_screenshare_command">**[start_screenshare](#start_screenshare_action)**</ins><br/>
+&emsp;&emsp;&emsp;&emsp;▫  Start a screenshare. To use this command, open a new connection to the server and login with the [screenshare role](#roles).<br/>
+&emsp;&emsp;&emsp;&emsp;▫  **Arguments**: target_id - int: the ID of the target<br/>
 &emsp;&emsp;&emsp;&emsp;▫  **Callback**: awaiting_screenshare_client.
 
-<br>
+<br/>
 
-&emsp;&emsp; ◦ <ins id="click_command">**[click](#click_action)**</ins>
-&emsp;&emsp;&emsp;&emsp;▫  Send a click to a target. Use it when a user is screensharing to you and you want to control their mouse.
-&emsp;&emsp;&emsp;&emsp;▫  **Arguments**:
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;▫ target_id - int: the ID of the target.
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;▫ x : int: the X location of the mouse.
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;▫ y : int: the Y location of the mouse.
+&emsp;&emsp; ◦ <ins id="click_command">**[click](#click_action)**</ins><br/>
+&emsp;&emsp;&emsp;&emsp;▫  Send a click to a target. Use it when a user is screensharing to you and you want to control their mouse.<br/>
+&emsp;&emsp;&emsp;&emsp;▫  **Arguments**:<br/>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;▫ target_id - int: the ID of the target.<br/>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;▫ x : int: the X location of the mouse.<br/>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;▫ y : int: the Y location of the mouse.<br/>
 &emsp;&emsp;&emsp;&emsp;▫  **Callback**: None.
 
-<br>
+<br/>
 
-&emsp;&emsp; ◦ <ins id="get_connected_users_command">**[get_connected_users](#get_connected_users_action)**</ins>
-&emsp;&emsp;&emsp;&emsp;▫  Send a click to a target. Use it when a user is screensharing to you and you want to control their mouse.
+&emsp;&emsp; ◦ <ins id="get_connected_users_command">**[get_connected_users](#get_connected_users_action)**</ins><br/>
+&emsp;&emsp;&emsp;&emsp;▫  Send a click to a target. Use it when a user is screensharing to you and you want to control their mouse.<br/>
 &emsp;&emsp;&emsp;&emsp;▫  **Callback**: users, with the connected users data
 
 - ### Target
