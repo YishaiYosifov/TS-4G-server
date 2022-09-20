@@ -80,7 +80,7 @@ Every client command will be sent as a json in a dict:
 <br/>
 
 &emsp;&emsp; ◦ <ins id="get_connected_users_command">**[get_connected_users](#get_connected_users_action)**</ins><br/>
-&emsp;&emsp;&emsp;&emsp;▫  Send a click to a target. Use it when a user is screensharing to you and you want to control their mouse.<br/>
+&emsp;&emsp;&emsp;&emsp;▫  Get all connected users.<br/>
 &emsp;&emsp;&emsp;&emsp;▫  **Callback**: users, with the connected users data
 
 - ### Target
