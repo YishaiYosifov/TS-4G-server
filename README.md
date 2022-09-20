@@ -10,7 +10,7 @@ Every client command will be sent as a json in a dict:
 3. [Miscellaneous](#miscellaneous)
 -  ### Host
 
-&emsp;&emsp; ○ <u id="block_input_command">**[block_input](#block_input_action)**</u>
+&emsp;&emsp; ◦ <ins id="block_input_command">**[block_input](#block_input_action)**</ins>
 
 &emsp;&emsp;&emsp;&emsp;▫ Blocks a targets keyboard and mouse.
 
@@ -26,7 +26,7 @@ Every client command will be sent as a json in a dict:
 
 <br/>
 
-&emsp;&emsp; ○ <u id="unblock_input_command">**[unblock_input](#unblock_input_action)**</u>
+&emsp;&emsp; ◦ <ins id="unblock_input_command">**[unblock_input](#unblock_input_action)**</ins>
 
 &emsp;&emsp;&emsp;&emsp;▫  Unblock a targets keyboard and mouse.
 
@@ -42,7 +42,7 @@ Every client command will be sent as a json in a dict:
 
 <br/>
 
-&emsp;&emsp; ○ <u id="block_screen_command">**[block_screen](#block_screen_action)**</u>
+&emsp;&emsp; ◦ <ins id="block_screen_command">**[block_screen](#block_screen_action)**</ins>
 
 &emsp;&emsp;&emsp;&emsp;▫  Block a targets screen. This will also block their mouse and keyboard.
 
@@ -58,7 +58,7 @@ Every client command will be sent as a json in a dict:
 
 <br/>
 
-&emsp;&emsp; ○ <u id="unblock_screen_command">**[unblock_screen](#unblock_screen_action)**</u>
+&emsp;&emsp; ◦ <ins id="unblock_screen_command">**[unblock_screen](#unblock_screen_action)**</ins>
 
 &emsp;&emsp;&emsp;&emsp;▫   Unblock a targets screen.
 
@@ -74,7 +74,7 @@ Every client command will be sent as a json in a dict:
 
 <br/>
 
-&emsp;&emsp; ○ <u id="block_url_command">**[block_url](#block_url_action)**</u>
+&emsp;&emsp; ◦ <ins id="block_url_command">**[block_url](#block_url_action)**</ins>
 
 &emsp;&emsp;&emsp;&emsp;▫  Block a website for a target. 
 
@@ -92,7 +92,7 @@ Every client command will be sent as a json in a dict:
 
 <br/>
 
-&emsp;&emsp; ○ <u id="unblock_url_command">**[unblock_url](#unblock_url_action)**</u>
+&emsp;&emsp; ◦ <ins id="unblock_url_command">**[unblock_url](#unblock_url_action)**</ins>
 
 &emsp;&emsp;&emsp;&emsp;▫  Unblock a website for a target.
 
@@ -110,7 +110,7 @@ Every client command will be sent as a json in a dict:
 
 <br/>
 
-&emsp;&emsp; ○ <u id="start_screenshare_command">**[start_screenshare](#start_screenshare_action)**</u>
+&emsp;&emsp; ◦ <ins id="start_screenshare_command">**[start_screenshare](#start_screenshare_action)**</ins>
 
 &emsp;&emsp;&emsp;&emsp;▫  Start a screenshare. To use this command, open a new connection to the server and login with the [screenshare role](#roles).
 
@@ -122,7 +122,7 @@ Every client command will be sent as a json in a dict:
 
 - ### Target
 
-	-  <u id="init_target_screenshare_command">**init_target_screenshare**</u>
+	-  <ins id="init_target_screenshare_command">**init_target_screenshare**</ins>
 		- Init a screenshare after the client received the start_screenshare client. To use this command, open a new connection to the server.
 		- **Arguments**:
 			- target_id - int: the target ID received from the start_screenshare action.
@@ -131,7 +131,7 @@ Every client command will be sent as a json in a dict:
 
 - ### Miscellaneous
 
-	-  <u>**login**</u>
+	-  <ins>**login**</ins>
 		- Log in to a role
 		- **Errors**:
 			- invalid_role: the role you are trying to log into doesn't exist.
@@ -148,21 +148,21 @@ Every server will be sent  as a json in a dict:
 `{"request_type": "action", "type": action type, "argument1": argument1, "argument2": argument2, etc...}`
 These actions will be send to the target when a command is executed
 
-- <u id="block_input_action">**[block_input](#block_input_command)**</u>
-- <u id="unblock_input_action">**[unblock_input](#unblock_input_command)**</u>
+- <ins id="block_input_action">**[block_input](#block_input_command)**</ins>
+- <ins id="unblock_input_action">**[unblock_input](#unblock_input_command)**</ins>
 
 <br/>
 
-- <u id="block_screen_action">**[block_screen](#block_screen_command)**</u>
-- <u id="unblock_screen_action">**[unblock_screen](#unblock_screen_command)**</u>
+- <ins id="block_screen_action">**[block_screen](#block_screen_command)**</ins>
+- <ins id="unblock_screen_action">**[unblock_screen](#unblock_screen_command)**</ins>
 
 <br/>
 
-- <u id="block_url_action">**[block_url](#block_url_command)**</u>
-- <u id="block_url_action">**[unblock_url](#unblock_url_command)**</u>
+- <ins id="block_url_action">**[block_url](#block_url_command)**</ins>
+- <ins id="block_url_action">**[unblock_url](#unblock_url_command)**</ins>
 <br/>
 
-- <u id="start_screenshare_action">**[start_screenshare](#start_screenshare_command)**</u>
+- <ins id="start_screenshare_action">**[start_screenshare](#start_screenshare_command)**</ins>
 	- **Arguments**:
 		-  target_id - int: the ID of the target that the host wants to screenshare
 		- screenshare_id: the ID of the screenshare.
