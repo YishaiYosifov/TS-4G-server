@@ -10,7 +10,7 @@ Every client command will be sent as a json in a dict:
 3. [Miscellaneous](#miscellaneous)
 -  ### Host
 
-&emsp;&emsp; ◦ <u id="block_input_command">**[block_input](#block_input_action)**</u>
+&emsp;&emsp; ○ <u id="block_input_command">**[block_input](#block_input_action)**</u>
 
 &emsp;&emsp;&emsp;&emsp;▫ Blocks a targets keyboard and mouse.
 
@@ -26,7 +26,7 @@ Every client command will be sent as a json in a dict:
 
 <br/>
 
-&emsp;&emsp; ◦ <u id="unblock_input_command">**[unblock_input](#unblock_input_action)**</u>
+&emsp;&emsp; ○ <u id="unblock_input_command">**[unblock_input](#unblock_input_action)**</u>
 
 &emsp;&emsp;&emsp;&emsp;▫  Unblock a targets keyboard and mouse.
 
@@ -42,7 +42,7 @@ Every client command will be sent as a json in a dict:
 
 <br/>
 
-&emsp;&emsp; ◦ <u id="block_screen_command">**[block_screen](#block_screen_action)**</u>
+&emsp;&emsp; ○ <u id="block_screen_command">**[block_screen](#block_screen_action)**</u>
 
 &emsp;&emsp;&emsp;&emsp;▫  Block a targets screen. This will also block their mouse and keyboard.
 
@@ -58,7 +58,7 @@ Every client command will be sent as a json in a dict:
 
 <br/>
 
-&emsp;&emsp; ◦ <u id="unblock_screen_command">**[unblock_screen](#unblock_screen_action)**</u>
+&emsp;&emsp; ○ <u id="unblock_screen_command">**[unblock_screen](#unblock_screen_action)**</u>
 
 &emsp;&emsp;&emsp;&emsp;▫   Unblock a targets screen.
 
@@ -74,7 +74,7 @@ Every client command will be sent as a json in a dict:
 
 <br/>
 
-&emsp;&emsp; • <u id="block_url_command">**[block_url](#block_url_action)**</u>
+&emsp;&emsp; ○ <u id="block_url_command">**[block_url](#block_url_action)**</u>
 
 &emsp;&emsp;&emsp;&emsp;▫  Block a website for a target. 
 
@@ -92,7 +92,7 @@ Every client command will be sent as a json in a dict:
 
 <br/>
 
-&emsp;&emsp; ◦ <u id="unblock_url_command">**[unblock_url](#unblock_url_action)**</u>
+&emsp;&emsp; ○ <u id="unblock_url_command">**[unblock_url](#unblock_url_action)**</u>
 
 &emsp;&emsp;&emsp;&emsp;▫  Unblock a website for a target.
 
@@ -110,7 +110,7 @@ Every client command will be sent as a json in a dict:
 
 <br/>
 
-&emsp;&emsp; ◦ <u id="start_screenshare_command">**[start_screenshare](#start_screenshare_action)**</u>
+&emsp;&emsp; ○ <u id="start_screenshare_command">**[start_screenshare](#start_screenshare_action)**</u>
 
 &emsp;&emsp;&emsp;&emsp;▫  Start a screenshare. To use this command, open a new connection to the server and login with the [screenshare role](#roles).
 
