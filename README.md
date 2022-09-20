@@ -9,6 +9,7 @@ Every client command will be sent as a json in a dict:
 2. [Target](#target)
 3. [Miscellaneous](#miscellaneous)
 -  ### Host
+
 - <u id="block_input_command">**[block_input](#block_input_action)**</u>
 	- Blocks a targets keyboard and mouse.
 	- **Errors**:
@@ -16,7 +17,9 @@ Every client command will be sent as a json in a dict:
 	- **Arguments**:
 		- [target_id](#target_id) - int: the ID of the target.
 	- **Callback**: blocked_input.
+
 <br/>
+
 - <u id="unblock_input_command">**[unblock_input](#unblock_input_action)**</u>
 	- Unblock a targets keyboard and mouse.
 	- **Errors**:
@@ -24,7 +27,9 @@ Every client command will be sent as a json in a dict:
 	- **Arguments**:
 		- [target_id](#target_id) - int: the ID of the target.
 	- **Callback**: unblocked_input.
+
 <br/>
+
 - <u id="block_screen_command">**[block_screen](#block_screen_action)**</u>
 	- Block a targets screen. This will also block their mouse and keyboard.
 	- **Errors**:
@@ -32,7 +37,9 @@ Every client command will be sent as a json in a dict:
 	- **Arguments**:
 		- [target_id](#target_id) - int: the ID of the target.
 	- **Callback**: blocked_screen.
+
 <br/>
+
 - <u id="unblock_screen_command">**[unblock_screen](#unblock_screen_action)**</u>
 	-  Unblock a targets screen.
 	- **Errors**:
@@ -40,7 +47,9 @@ Every client command will be sent as a json in a dict:
 	- **Arguments**:
 		- [target_id](#target_id) - int: the ID of the target.
 	- **Callback**: unblocked_screen.
+
 <br/>
+
 - <u id="block_url_command">**[block_url](#block_url_action)**</u>
 	- Block a website for a target. 
 	- **Errors**:
@@ -49,7 +58,9 @@ Every client command will be sent as a json in a dict:
 		- [target_id](#target_id) - int: the ID of the target.
 		- url - str: the url of the website you are want to block.
 	- **Callback**: blocked_url.
+
 <br/>
+
 - <u id="unblock_url_command">**[unblock_url](#unblock_url_action)**</u>
 	- Unblock a website for a target.
 	- **Errors**:
@@ -58,7 +69,9 @@ Every client command will be sent as a json in a dict:
 		- [target_id](#target_id) - int: the ID of the target.
 		- url - str: the url of the website you want to unblock.
 	- **Callback**: unblocked_url.
+
 <br/>
+
 - <u style="background-color=red" id="start_screenshare_command">**[start_screenshare](#start_screenshare_action)**</u>
 	- Start a screenshare. To use this command, open a new connection to the server and login with the [screenshare role](#roles).
 	 - **Arguments**:
