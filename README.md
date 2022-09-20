@@ -16,11 +16,11 @@ Every client command will be sent as a json in a dict:
 
 &emsp;&emsp;&emsp;&emsp;◦ **Errors**:
 
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;◻ user_already_affected: You are trying to block a targets input when it's already blocked.
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;▫ user_already_affected: You are trying to block a targets input when it's already blocked.
 
 &emsp;&emsp;&emsp;&emsp;◦ **Arguments**:
 
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;◻ [target_id](#target_id) - int: the ID of the target.
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;▫ [target_id](#target_id) - int: the ID of the target.
 
 &emsp;&emsp;&emsp;&emsp;◦ **Callback**: blocked_input.
 
@@ -32,11 +32,11 @@ Every client command will be sent as a json in a dict:
 
 &emsp;&emsp;&emsp;&emsp;◦  **Errors**:
 
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;◻ user_not_affected: You are trying to unblock a targets input when it's not blocked.
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;▫ user_not_affected: You are trying to unblock a targets input when it's not blocked.
 
 &emsp;&emsp;&emsp;&emsp;◦  **Arguments**:
 
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;◻ [target_id](#target_id) - int: the ID of the target.
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;▫ [target_id](#target_id) - int: the ID of the target.
 
 &emsp;&emsp;&emsp;&emsp;◦  **Callback**: unblocked_input.
 
@@ -48,11 +48,11 @@ Every client command will be sent as a json in a dict:
 
 &emsp;&emsp;&emsp;&emsp;◦  **Errors**:
 
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;◻ user_already_affected: You are trying to block a targets screen when it's already blocked.
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;▫ user_already_affected: You are trying to block a targets screen when it's already blocked.
 
 &emsp;&emsp;&emsp;&emsp;◦  **Arguments**:
 
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;◻ [target_id](#target_id) - int: the ID of the target.
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;▫ [target_id](#target_id) - int: the ID of the target.
 
 &emsp;&emsp;&emsp;&emsp;◦  **Callback**: blocked_screen.
 
@@ -64,11 +64,11 @@ Every client command will be sent as a json in a dict:
 
 &emsp;&emsp;&emsp;&emsp;◦  **Errors**:
 
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;◻ user_not_affected: You are trying to unblock a targets screen when it's not blocked.
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;▫ user_not_affected: You are trying to unblock a targets screen when it's not blocked.
 
 &emsp;&emsp;&emsp;&emsp;◦  **Arguments**:
 
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;◻ [target_id](#target_id) - int: the ID of the target.
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;▫ [target_id](#target_id) - int: the ID of the target.
 
 &emsp;&emsp;&emsp;&emsp;◦  **Callback**: unblocked_screen.
 
@@ -80,13 +80,13 @@ Every client command will be sent as a json in a dict:
 
 &emsp;&emsp;&emsp;&emsp;◦  **Errors**:
 
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;◻ user_already_affected: You are trying to block a website that is already blocked.
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;▫ user_already_affected: You are trying to block a website that is already blocked.
 
 &emsp;&emsp;&emsp;&emsp;◦  **Arguments**:
 
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;◻ [target_id](#target_id) - int: the ID of the target.
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;▫ [target_id](#target_id) - int: the ID of the target.
 
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;◻ url - str: the url of the website you are want to block.
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;▫ url - str: the url of the website you are want to block.
 
 &emsp;&emsp;&emsp;&emsp;◦  **Callback**: blocked_url.
 
@@ -98,13 +98,13 @@ Every client command will be sent as a json in a dict:
 
 &emsp;&emsp;&emsp;&emsp;◦  **Errors**:
 
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;◻ user_not_affected: You are trying to unblock a website that is not blocked.
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;▫ user_not_affected: You are trying to unblock a website that is not blocked.
 
 &emsp;&emsp;&emsp;&emsp;◦  **Arguments**:
 
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;◻ [target_id](#target_id) - int: the ID of the target.
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;▫ [target_id](#target_id) - int: the ID of the target.
 
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;◻ url - str: the url of the website you want to unblock.
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;▫ url - str: the url of the website you want to unblock.
 
 &emsp;&emsp;&emsp;&emsp;◦  **Callback**: unblocked_url.
 
@@ -116,7 +116,7 @@ Every client command will be sent as a json in a dict:
 
 &emsp;&emsp;&emsp;&emsp;◦  **Arguments**:
 
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;◻ [target_id](#target_id) - int: the ID of the target.
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;▫ [target_id](#target_id) - int: the ID of the target.
 
 &emsp;&emsp;&emsp;&emsp;◦  **Callback**: awaiting_screenshare_client.
 
